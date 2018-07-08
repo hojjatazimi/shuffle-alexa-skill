@@ -4,6 +4,8 @@ var alexa = require("alexa-app");
 var PORT = process.env.PORT || 8080;
 var app = express();
 
+var musics = [];
+
 // ALWAYS setup the alexa app and attach it to express before anything else.
 var alexaApp = new alexa.app("shuffle");
 
@@ -48,7 +50,7 @@ alexaApp.intent("nameIntent", {
   },
   function(request, response) {
     console.log('hojjat_shuffle');
-    console.log(request);
+    console.log(JSON.stringify(request));
     response.say("Success!");
   }
 );
