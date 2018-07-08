@@ -32,7 +32,13 @@ alexaApp.launch(function(request, response) {
   response.say("Hello from Hojjat");
 });
 
-alexaApp.dictionary = { "names": ["matt", "joe", "bob", "bill", "mary", "jane", "dawn"] };
+alexaApp.intent('playChannel', function(req, res){
+  const stream ={
+    "url": "https://box.backtory.com/beeptunes/980/03151/738/AAC_HE/1_4ud6UHEQtS.m4a",
+  };
+  res.audioPlayerPlayStream("ENQUEUE", stream);
+})
+
 
 alexaApp.intent("nameIntent", {
     "slots": { "NAME": "LITERAL" },
