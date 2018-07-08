@@ -27,6 +27,8 @@ alexaApp.express({
 app.set("view engine", "ejs");
 
 alexaApp.launch(function(request, response) {
+  console.log('hojjat_shuffle');
+  console.log(request);
   response.say("Hello from Hojjat");
 });
 
