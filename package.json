@@ -1,0 +1,17 @@
+{
+  "name": "shuffle_alexa_skill",
+  "version": "1.0.0",
+  "description": "an alexa skill to make listening to persian music mucj easier",
+  "main": "index.js",
+  "repository": "shuffle.one",
+  "author": "Hojjat Azimi",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "alexa-app": "^4.2.2",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}
