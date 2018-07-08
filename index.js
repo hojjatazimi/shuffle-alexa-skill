@@ -39,7 +39,8 @@ alexaApp.intent("nameIntent", {
     ]
   },
   function(request, response) {
-    console.log('hojjat_shuffle',request);
+    console.log('hojjat_shuffle');
+    console.log(request);
     response.say("Success!");
   }
 );
