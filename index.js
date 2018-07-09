@@ -38,7 +38,11 @@ alexaApp.launch(function(request, response) {
     MUSICS[user_id] = res.tracks;
   });
 
-  response.say("Hi, Welcome To Shuffle.");
+  response.say("music time");
+  const stream ={
+    "url": "http://sv.blogmusic.ir/myahang/Shahram-Shokoohi-Akharin-Negah-128.mp3",
+  };
+  res.audioPlayerPlayStream("REPLACE_ALL", stream);
 });
 
 alexaApp.intent('playChannel', function(req, res){
