@@ -64,8 +64,8 @@ alexaApp.launch(async function(req, response) {
 alexaApp.audioPlayer("PlaybackStarted", function(request, response) {
   // immediate response
   console.log('HOJJAT_PLAY_BACK');
-  console.log(request.data);
-  const user_id = request.data.userId;
+  console.log(request.data.context.System.user);
+  const user_id = request.data.context.System.user.userId;
   const prevMusic = MUSICS[user_id][INDEXES[user_id]];
   INDEXES[user_id] ++;
   const music = MUSICS[user_id][INDEXES[user_id]];
