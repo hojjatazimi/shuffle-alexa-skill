@@ -60,24 +60,36 @@ alexaApp.launch(async function(req, response) {
 
 });
 
-
-
-alexaApp.audioPlayer("PlaybackNearlyFinished", function(request, response) {
+alexaApp.audioPlayer("PlaybackFinished", function(request, response) {
   // immediate response
-  console.log('HOJJAT_PLAY_BACK');
-  console.log(request.data.context.System.user);
   const user_id = request.data.context.System.user.userId;
-  const prevMusic = MUSICS[user_id][INDEXES[user_id]];
-  INDEXES[user_id] ++;
   const music = MUSICS[user_id][INDEXES[user_id]];
   var stream = {
     "url": music.aacPath,
     "token": music.id,
-    "expectedPreviousToken": prevMusic.id,
     "offsetInMilliseconds": 0
   };
   console.log(stream);
-  response.audioPlayerPlayStream("ENQUEUE", stream);
+  response.audioPlayerPlayStream("REPLACE_ALL", stream);
+});
+
+
+alexaApp.audioPlayer("PlaybackStarted", function(request, response) {
+  // immediate response
+  // console.log('HOJJAT_PLAY_BACK');
+  // console.log(request.data.context.System.user);
+  const user_id = request.data.context.System.user.userId;
+  // const prevMusic = MUSICS[user_id][INDEXES[user_id]];
+  INDEXES[user_id] ++;
+  // const music = MUSICS[user_id][INDEXES[user_id]];
+  // var stream = {
+  //   "url": music.aacPath,
+  //   "token": music.id,
+  //   "expectedPreviousToken": prevMusic.id,
+  //   "offsetInMilliseconds": 0
+  // };
+  // console.log(stream);
+  // response.audioPlayerPlayStream("ENQUEUE", stream);
 });
 
 alexaApp.intent('playChannel', async function(req, response){
