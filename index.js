@@ -120,7 +120,7 @@ alexaApp.audioPlayer("PlaybackNearlyFinished", function(request, response) {
 
 alexaApp.audioPlayer("PreviousCommandIssued", function(request, response) {
   const user_id = request.data.context.System.user.userId;
-  if (user_id > 0){
+  if (INDEXES[user_id] > 0){
     console.log('playing new');
     
     const old = INDEXES[user_id];
@@ -197,7 +197,7 @@ alexaApp.intent('AMAZON.ResumeIntent', function(req, response){
 
 alexaApp.intent('AMAZON.PreviousIntent', function(req, response){
   const user_id = req.data.context.System.user.userId;
-  if (user_id > 0){
+  if (INDEXES[user_id] > 0){
     console.log('playing new');
     
     const old = INDEXES[user_id];
