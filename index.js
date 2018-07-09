@@ -55,20 +55,20 @@ const      metadata = {
         "art": {
           "sources": [
             {
-              "url": "https://url-of-the-skill-image.com/brie-album-art.png"
+              "url": "https://storage.backtory.com/beeptunes/track/cover/0097bf7f-9686-436c-bdb9-c1a6586ee2b1.jpg"
             }
           ]
         },
         "backgroundImage": {
           "sources": [
             {
-              "url": "https://url-of-the-skill-image.com/brie-background.png"
+              "url": "https://storage.backtory.com/beeptunes/track/cover/0097bf7f-9686-436c-bdb9-c1a6586ee2b1.jpg"
             }
           ]
         }
       }
       console.log('Playing_from_launch', stream);
-      response.audioPlayerPlayStream("REPLACE_ALL", stream, metadata);
+      response.audioPlayerPlayStream("REPLACE_ALL", stream, {metadata:metadata});
     }catch(e){
       console.error(e);
       response.say('Something went wrong');
