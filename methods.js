@@ -40,6 +40,7 @@ const out = {
       ]
     }
   }
+  console.log(out);
   return out;
 
 }
