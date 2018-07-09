@@ -9,9 +9,7 @@ var INDEXES = [];
 
 const methods = require('./methods')
 
-methods.getMusics(function(res){
-  console.log(JSON.parse(res).tracks)
-})
+
 
 // ALWAYS setup the alexa app and attach it to express before anything else.
 var alexaApp = new alexa.app("shuffle");
