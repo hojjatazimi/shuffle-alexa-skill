@@ -12,6 +12,7 @@ const methods = require('./methods')
 
 
 
+
 // ALWAYS setup the alexa app and attach it to express before anything else.
 var alexaApp = new alexa.app("shuffle");
 
@@ -39,23 +40,20 @@ alexaApp.launch(async function(req, response) {
 
     const user_id = req.data.session.userId;
     INDEXES[user_id] = 0;
-    const options = { method: 'GET',
-      url: 'https://streaming.shuffle.one/public/channel/promoted',
-      qs: { channelId: '889', page: '1', count: '200' },
-      headers: 
-       { 'Postman-Token': 'e7d28854-b797-46fd-8a34-3485aacf028c',
-         'Cache-Control': 'no-cache' } };
-    MUSICS[user_id] = await request(options).body;
-    console.log(MUSICS[user_id]);
-    MUSICS[user_id] = JSON.parse(MUSICS[user_id]);
-    const music = MUSICS[user_id][INDEXES[user_id]];
-    const stream ={
-      "url": music.aacPath,
-      "token": music.id,
-      "offsetInMilliseconds": 0
-    };
-    // response.say('Hi');
-    response.audioPlayerPlayStream("REPLACE_ALL", stream);
+    try{
+      MUSICS[user_id]  =  await methods.getMusics();
+      const music = MUSICS[user_id][INDEXES[user_id]];
+      const stream ={
+        "url": music.aacPath,
+        "token": music.id,
+        "offsetInMilliseconds": 0
+      };
+      response.audioPlayerPlayStream("REPLACE_ALL", stream);
+    }catch(e){
+      console.error(e);
+      response.say('Somwthing went wrong');
+    }
+
 
 });
 

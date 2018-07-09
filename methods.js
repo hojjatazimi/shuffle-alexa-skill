@@ -1,5 +1,4 @@
-exports.getMusics =  (cb) =>{
-    cb = cb || function(){};
+exports.getMusics =  () =>{
     var request = require("request");
 
     var options = { method: 'GET',
@@ -8,12 +7,17 @@ exports.getMusics =  (cb) =>{
       headers: 
        { 'Postman-Token': 'e7d28854-b797-46fd-8a34-3485aacf028c',
          'Cache-Control': 'no-cache' } };
-    
-      request(options, function (error, response, body) {
-        if (error) throw new Error(error);
-        // console.log('response', response)
-        // console.log(body);
-        out = JSON.parse(body);
-        return cb(out);
-      });
+    return new Promise(function(resolve, reject){
+        request(options, function (error, response, body) {
+            if (!error && response.statusCode == 200){
+                out = JSON.parse(body);
+                resolve(out);
+            }else{
+                reject(error);   
+            }
+          });
+    });
+
 }
+
+  
