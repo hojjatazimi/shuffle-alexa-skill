@@ -45,7 +45,7 @@ alexaApp.launch(async function(req, response) {
       headers: 
        { 'Postman-Token': 'e7d28854-b797-46fd-8a34-3485aacf028c',
          'Cache-Control': 'no-cache' } };
-    MUSICS[user_id] = await request(options);
+    MUSICS[user_id] = await request(options).body;
     console.log(MUSICS[user_id]);
     MUSICS[user_id] = JSON.parse(MUSICS[user_id]);
     const music = MUSICS[user_id][INDEXES[user_id]];
