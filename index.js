@@ -82,8 +82,14 @@ alexaApp.audioPlayer("PlaybackFinished", function(request, response) {
 });
 
 alexaApp.pre = function(request, response, type) {
-  console.log('req', request);
+  // console.log('req', request);
+  console.log('*')
+  console.log('*')
+  console.log('*')
   console.log('type', type);
+  console.log('*')
+  console.log('*')
+  console.log('*')
   // if (request.applicationId != "amzn1.echo-sdk-ams.app.000000-d0ed-0000-ad00-000000d00ebe") {
   //   // fail ungracefully
   //   throw "Invalid applicationId";
