@@ -32,13 +32,13 @@ alexaApp.express({
 app.set("view engine", "ejs");
 
 alexaApp.launch(function(request, response) {
-  const user_id = request.data.session.userId;
-  INDEXES[user_id] = 0;
-  methods.getMusics(function(res){
-    MUSICS[user_id] = res.tracks;
-  });
+  // const user_id = request.data.session.userId;
+  // INDEXES[user_id] = 0;
+  // methods.getMusics(function(res){
+  //   MUSICS[user_id] = res.tracks;
+  // });
 
-  response.say("music time");
+  // response.say("music time");
   const stream ={
     "url": "http://sv.blogmusic.ir/myahang/Shahram-Shokoohi-Akharin-Negah-128.mp3",
   };
