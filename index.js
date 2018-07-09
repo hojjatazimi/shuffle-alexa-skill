@@ -42,7 +42,6 @@ alexaApp.launch(function(request, response) {
   const stream ={
     "url": "https://box.backtory.com/beeptunes/981/02453/028/AAC_HE/1_D4i6ee1OWt.m4a",
     "token": "some_token",
-    "expectedPreviousToken": "some_previous_token",
     "offsetInMilliseconds": 0
   };
   res.audioPlayerPlayStream("REPLACE_ALL", stream);
