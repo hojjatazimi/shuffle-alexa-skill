@@ -210,7 +210,7 @@ alexaApp.intent('AMAZON.RepeatIntent', function(req, response){
     "offsetInMilliseconds": SECONDS[user_id]
   };
   // response.say('Song will be repeated.');
-  response.audioPlayerPlayStream("REPLACE_ALL", stream);
+  response.audioPlayerPlayStream("ENQUEUE", stream);
 })
 
 alexaApp.intent('AMAZON.PreviousIntent', function(req, response){
