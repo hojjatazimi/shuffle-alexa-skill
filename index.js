@@ -47,7 +47,7 @@ alexaApp.launch(function(request, response) {
 });
 
 
-app.audioPlayer("PlaybackStarted", function(request, response) {
+alexaApp.audioPlayer("PlaybackStarted", function(request, response) {
   // immediate response
   const user_id = request.data.session.userId;
   const prevMusic = MUSICS[user_id][INDEXES[user_id]];
