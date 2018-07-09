@@ -47,6 +47,7 @@ alexaApp.launch(async function(req, response) {
          'Cache-Control': 'no-cache' } };
     MUSICS[user_id] = await request(options);
     const music = MUSICS[user_id][INDEXES[user_id]];
+    console.log(music)
     const stream ={
       "url": music.aacPath,
       "token": music.id,
