@@ -117,7 +117,7 @@ alexaApp.audioPlayer("PlaybackStarted", function(request, response) {
   // response.audioPlayerPlayStream("ENQUEUE", stream);
 });
 
-alexa.on('System.ExceptionEncountered', function(req, res){
+alexaApp.on('System.ExceptionEncountered', function(req, res){
 console.log('err', req.err);
 })
 
