@@ -41,7 +41,7 @@ alexaApp.launch(function(request, response) {
   // response.say("music time");
   const stream ={
     "url": "https://box.backtory.com/beeptunes/981/02453/028/AAC_HE/1_D4i6ee1OWt.m4a",
-    "token": "some_token",
+    "token": "1234AAAABBBBCCCCCDDDDEEEEEFFFF",
     "offsetInMilliseconds": 0
   };
   res.audioPlayerPlayStream("REPLACE_ALL", stream);
