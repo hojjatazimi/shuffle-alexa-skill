@@ -80,7 +80,7 @@ alexaApp.audioPlayer("PlaybackNearlyFinished", function(request, response) {
   response.audioPlayerPlayStream("ENQUEUE", stream);
 });
 
-alexaApp.intent('playChannel', function(req, res){
+alexaApp.intent('playChannel', async function(req, res){
   const user_id = req.data.session.userId;
   INDEXES[user_id] = 0;
   try{
