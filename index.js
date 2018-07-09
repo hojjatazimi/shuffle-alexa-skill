@@ -32,19 +32,34 @@ alexaApp.express({
 app.set("view engine", "ejs");
 
 alexaApp.launch(function(request, response) {
-  // const user_id = request.data.session.userId;
-  // INDEXES[user_id] = 0;
-  // methods.getMusics(function(res){
-  //   MUSICS[user_id] = res.tracks;
-  // });
+  const user_id = request.data.session.userId;
+  INDEXES[user_id] = 0;
+  methods.getMusics(function(res){
+    MUSICS[user_id] = res.tracks;
+    const music = MUSICS[user_id][INDEXES[user_id]];
+    const stream ={
+      "url": music.aacPath,
+      "token": music.id,
+      "offsetInMilliseconds": 0
+    };
+    response.audioPlayerPlayStream("REPLACE_ALL", stream);
+  });
+});
 
-  // response.say("music time");
-  const stream ={
-    "url": "https://box.backtory.com/beeptunes/981/02453/028/AAC_HE/1_D4i6ee1OWt.m4a",
-    "token": "1234AAAABBBBCCCCCDDDDEEEEEFFFF",
+
+app.audioPlayer("PlaybackStarted", function(request, response) {
+  // immediate response
+  const user_id = request.data.session.userId;
+  const prevMusic = MUSICS[user_id][INDEXES[user_id]];
+  INDEXES[user_id] ++;
+  const music = MUSICS[user_id][INDEXES[user_id]];
+  var stream = {
+    "url": music.aacPath,
+    "token": music.id,
+    "expectedPreviousToken": prevMusic.id,
     "offsetInMilliseconds": 0
   };
-  response.audioPlayerPlayStream("REPLACE_ALL", stream);
+  response.audioPlayerPlayStream("ENQUEUE", stream);
 });
 
 alexaApp.intent('playChannel', function(req, res){
