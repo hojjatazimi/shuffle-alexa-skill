@@ -84,18 +84,7 @@ alexaApp.playbackController('PlaybackStopped', (req, response)=>{
   console.log('ammatono', req);
 })
 
-// alexaApp.audioPlayer("PlaybackFinished", function(request, response) {
-//   // immediate response
-//   const user_id = request.data.context.System.user.userId;
-//   const music = MUSICS[user_id][INDEXES[user_id]];
-//   var stream = {
-//     "url": music.aacPath,
-//     "token": music.id,
-//     "offsetInMilliseconds": 0
-//   };
-//   console.log('finished, playing new', stream);
-//   response.audioPlayerPlayStream("REPLACE_ALL", stream);
-// });
+
 
 alexaApp.pre = function(request, response, type) {
   // console.log('req', request);
@@ -150,6 +139,17 @@ alexaApp.intent('playChannel', async function(req, response){
     console.error(e);
     response.say('Something went wrong');
   }
+})
+
+alexaApp.on('AMAZON.NextIntent', function(req, res){
+  const user_id = req.data.context.System.user.userId;
+  INDEXES[user_id]++;
+  var stream = {
+    "url": MUSICS[user_id][INDEXES[user_id]].aacPath,
+    "token": MUSICS[user_id][INDEXES[user_id]].id,
+    "offsetInMilliseconds": 0
+  };
+  response.audioPlayerPlayStream("REPLACE_ALL", stream);
 })
 
 app.listen(PORT, () => console.log("Listening on port " + PORT + "."));
