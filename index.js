@@ -67,9 +67,9 @@ alexaApp.playbackController('NextCommandIssued', (req, response) => {
   response.audioPlayerPlayStream("REPLACE_ALL", stream);
 });
 alexaApp.playbackController('PauseCommandIssued', (req, response)=>{
-  // const user_id = req.userId;
-  // SECONDS[user_id] = req.AudioPlayer.offsetInMilliseconds;
-  console.log('DOOSTAN', req);
+  const user_id = req.userId;
+  SECONDS[user_id] = req.context.AudioPlayer.offsetInMilliseconds;
+  // console.log('DOOSTAN', req);
 })
 alexaApp.playbackController('PlayCommandIssued', (req, response)=>{
   const user_id = req.userId;
