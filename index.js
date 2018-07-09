@@ -61,7 +61,6 @@ alexaApp.playbackController('NextCommandIssued', (req, response) => {
   var stream = {
     "url": MUSICS[user_id][INDEXES[user_id]+1].aacPath,
     "token": MUSICS[user_id][INDEXES[user_id]+1].id,
-    "expectedPreviousToken": MUSICS[user_id][INDEXES[user_id]].id,
     "offsetInMilliseconds": 0
   };
   response.audioPlayerPlayStream("REPLACE_ALL", stream);
