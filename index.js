@@ -51,6 +51,7 @@ alexaApp.launch(async function(req, response) {
         "token": music.id,
         "offsetInMilliseconds": 0
       };
+      console.log('Playing_from_launch', stream);
       response.audioPlayerPlayStream("REPLACE_ALL", stream);
     }catch(e){
       console.error(e);
