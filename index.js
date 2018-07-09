@@ -8,6 +8,7 @@ var app = express();
 var MUSICS = [];
 var INDEXES = [];
 var SECONDS = [];
+var REPEATS = [];
 const methods = require('./methods')
 
 
@@ -106,6 +107,10 @@ alexaApp.playbackController('PlayCommandIssued', (req, response)=>{
 alexaApp.playbackController('PlaybackStopped', (req, response)=>{
   console.log('ammatono', req);
 })
+alexaApp.playbackController('PlaybackStarted', (req, response)=>{
+  const user_id = req.userId;
+  REPEATS[user_id] = false;
+})
 
 
 
@@ -123,20 +128,22 @@ alexaApp.pre = function(request, response, type) {
 alexaApp.audioPlayer("PlaybackNearlyFinished", function(request, response) {
   console.log('playing new');
   const user_id = request.data.context.System.user.userId;
-  const old = INDEXES[user_id];
-  INDEXES[user_id] ++;
-  console.log('index changed from '+String(old), String(INDEXES[user_id]));
-  
-  
-  const music = MUSICS[user_id][INDEXES[user_id]];
-  var stream = {
-    "url": music.aacPath,
-    "token": music.id,
-    // 'expectedPreviousToken':MUSICS[user_id][old].id,
-    "offsetInMilliseconds": 0
-  };
-  console.log('finished, playing new', stream);
-  response.audioPlayerPlayStream("REPLACE_ALL", stream);
+  if (REPEATS[user_id] == false){
+    const old = INDEXES[user_id];
+    INDEXES[user_id] ++;
+    console.log('index changed from '+String(old), String(INDEXES[user_id]));
+    
+    
+    const music = MUSICS[user_id][INDEXES[user_id]];
+    var stream = {
+      "url": music.aacPath,
+      "token": music.id,
+      // 'expectedPreviousToken':MUSICS[user_id][old].id,
+      "offsetInMilliseconds": 0
+    };
+    console.log('finished, playing new', stream);
+    response.audioPlayerPlayStream("REPLACE_ALL", stream);
+  }
 
 
 });
@@ -191,6 +198,18 @@ alexaApp.intent('AMAZON.ResumeIntent', function(req, response){
     "token": MUSICS[user_id][INDEXES[user_id]].id,
     "offsetInMilliseconds": SECONDS[user_id]
   };
+  response.audioPlayerPlayStream("REPLACE_ALL", stream);
+})
+alexaApp.intent('AMAZON.RepeatIntent', function(req, response){
+  const user_id = req.data.context.System.user.userId;
+  REPEATS[user_id] = true;
+  var stream = {
+    "url": MUSICS[user_id][INDEXES[user_id]].aacPath,
+    "token": MUSICS[user_id][INDEXES[user_id]].id,
+    'expectedPreviousToken': MUSICS[user_id][INDEXES[user_id]].id,
+    "offsetInMilliseconds": SECONDS[user_id]
+  };
+  response.say('Song will be repeated.');
   response.audioPlayerPlayStream("REPLACE_ALL", stream);
 })
 
