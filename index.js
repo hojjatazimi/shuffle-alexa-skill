@@ -68,7 +68,7 @@ alexaApp.playbackController('NextCommandIssued', (req, response) => {
 });
 alexaApp.playbackController('PauseCommandIssued', (req, response)=>{
   const user_id = req.userId;
-  console.log('ammatono', req.userId);
+  console.log('ammatono', req);
 })
 alexaApp.playbackController('PlaybackStopped', (req, response)=>{
   console.log('ammatono', req);
