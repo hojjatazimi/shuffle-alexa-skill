@@ -56,7 +56,7 @@ alexaApp.launch(async function(req, response) {
     }
 });
 
-alexaApp.playbackController('NextCommandIssued', (request, response) => {
+alexaApp.playbackController('NextCommandIssued', (req, response) => {
   const user_id = req.data.session.userId;
   var stream = {
     "url": MUSICS[user_id][INDEXES[user_id]+1].aacPath,
