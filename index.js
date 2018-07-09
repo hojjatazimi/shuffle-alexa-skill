@@ -159,7 +159,7 @@ alexaApp.intent('AMAZON.PauseIntent',  function(req, response){
   SECONDS[user_id] = req.context.AudioPlayer.offsetInMilliseconds;
   response.audioPlayerStop()
 })
-alexaApp.intent('Amazon.ResumeIntent', function(req, response){
+alexaApp.intent('AMAZON.ResumeIntent', function(req, response){
   const user_id = req.data.context.System.user.userId;
   var stream = {
     "url": MUSICS[user_id][INDEXES[user_id]].aacPath,
