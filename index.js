@@ -118,7 +118,8 @@ alexaApp.audioPlayer("PlaybackStarted", function(request, response) {
 });
 
 alexaApp.on('System.ExceptionEncountered', function(req, res){
-console.log('err', req);
+console.log('err', req.data.request.error);
+console.log('cause', req.data.request.cause);
 })
 
 alexaApp.intent('playChannel', async function(req, response){
