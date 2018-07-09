@@ -1,4 +1,4 @@
-exports.getMusics = async (cb) =>{
+exports.getMusics =  (cb) =>{
     cb = cb || function(){};
     var request = require("request");
 
