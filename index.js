@@ -61,7 +61,8 @@ alexaApp.launch(async function(req, response) {
 });
 
 
-alexaApp.audioPlayer("PlaybackStarted", function(request, response) {
+
+alexaApp.audioPlayer("PlaybackNearlyFinished", function(request, response) {
   // immediate response
   console.log('HOJJAT_PLAY_BACK');
   console.log(request.data.context.System.user);
@@ -75,14 +76,26 @@ alexaApp.audioPlayer("PlaybackStarted", function(request, response) {
     "expectedPreviousToken": prevMusic.id,
     "offsetInMilliseconds": 0
   };
+  console.log(stream);
   response.audioPlayerPlayStream("ENQUEUE", stream);
 });
 
 alexaApp.intent('playChannel', function(req, res){
-  const stream ={
-    "url": "http://sv.blogmusic.ir/myahang/Shahram-Shokoohi-Akharin-Negah-128.mp3",
-  };
-  res.audioPlayerPlayStream("REPLACE_ALL", stream);
+  const user_id = req.data.session.userId;
+  INDEXES[user_id] = 0;
+  try{
+    MUSICS[user_id]  =  await methods.getMusics();
+    const music = MUSICS[user_id][INDEXES[user_id]];
+    const stream ={
+      "url": music.aacPath,
+      "token": music.id,
+      "offsetInMilliseconds": 0
+    };
+    response.audioPlayerPlayStream("REPLACE_ALL", stream);
+  }catch(e){
+    console.error(e);
+    response.say('Something went wrong');
+  }
 })
 
 
