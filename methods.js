@@ -40,7 +40,7 @@ const out = {
       ]
     }
   }
-  console.log(out);
+  console.log(JSON.stringify(out));
   return out;
 
 }
