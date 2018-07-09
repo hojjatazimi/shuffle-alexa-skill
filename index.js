@@ -69,7 +69,7 @@ alexaApp.playbackController('NextCommandIssued', (req, response) => {
 alexaApp.playbackController('PreviousCommandIssued', (req, response) => {
   const user_id = req.data.context.System.user.userId;
   if (INDEXES[user_id] > 0){
-    INDEXES[user_id]++;
+    INDEXES[user_id]--;
     var stream = {
       "url": MUSICS[user_id][INDEXES[user_id]].aacPath,
       "token": MUSICS[user_id][INDEXES[user_id]].id,
