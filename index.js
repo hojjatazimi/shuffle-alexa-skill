@@ -34,10 +34,10 @@ alexaApp.express({
 // from here on you can setup any other express routes or middlewares as normal
 app.set("view engine", "ejs");
 
-alexaApp.launch(async function(request, response) {
+alexaApp.launch(async function(req, response) {
   
 
-    const user_id = request.data.session.userId;
+    const user_id = req.data.session.userId;
     INDEXES[user_id] = 0;
     const options = { method: 'GET',
       url: 'https://streaming.shuffle.one/public/channel/promoted',
