@@ -44,7 +44,7 @@ alexaApp.launch(function(request, response) {
     "token": "1234AAAABBBBCCCCCDDDDEEEEEFFFF",
     "offsetInMilliseconds": 0
   };
-  res.audioPlayerPlayStream("REPLACE_ALL", stream);
+  response.audioPlayerPlayStream("REPLACE_ALL", stream);
 });
 
 alexaApp.intent('playChannel', function(req, res){
