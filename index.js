@@ -36,18 +36,19 @@ app.set("view engine", "ejs");
 alexaApp.launch(function(request, response) {
   const user_id = request.data.session.userId;
   INDEXES[user_id] = 0;
+  await
   methods.getMusics(function(res){
     MUSICS[user_id] = res.tracks;
     const music = MUSICS[user_id][INDEXES[user_id]];
-    const stream ={
-      "url": music.aacPath,
-      "token": music.id,
-      "offsetInMilliseconds": 0
-    };
     console.log('ahhh', stream);
-    response.say('Hi');
-    response.audioPlayerPlayStream("REPLACE_ALL", stream);
   });
+  const stream ={
+    "url": music.aacPath,
+    "token": music.id,
+    "offsetInMilliseconds": 0
+  };
+  response.say('Hi');
+  response.audioPlayerPlayStream("REPLACE_ALL", stream);
 });
 
 
