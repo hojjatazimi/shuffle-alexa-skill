@@ -90,7 +90,7 @@ alexaApp.pre = function(request, response, type) {
   console.log('*')
 };
 
-alexaApp.audioPlayer("PlaybackStarted", function(request, response) {
+alexaApp.audioPlayer("PlaybackNearlyFinished", function(request, response) {
   console.log('playing new');
   const user_id = request.data.context.System.user.userId;
   const old = INDEXES[user_id];
