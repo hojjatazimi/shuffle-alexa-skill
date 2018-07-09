@@ -11,11 +11,7 @@ var INDEXES = [];
 const methods = require('./methods')
 
 
-meh = async ()=> {
-  const shit = await methods.getMusics();
-  console.log(shit);
-}
-meh();
+
 // ALWAYS setup the alexa app and attach it to express before anything else.
 var alexaApp = new alexa.app("shuffle");
 
@@ -38,10 +34,11 @@ alexaApp.express({
 // from here on you can setup any other express routes or middlewares as normal
 app.set("view engine", "ejs");
 
-alexaApp.launch(async function(req, response) {
-  
 
-    const user_id = req.data.session.userId;
+
+
+alexaApp.launch(async function(req, response) {
+  const user_id = req.data.session.userId;
     INDEXES[user_id] = 0;
     try{
       MUSICS[user_id]  =  await methods.getMusics();
@@ -57,8 +54,17 @@ alexaApp.launch(async function(req, response) {
       console.error(e);
       response.say('Something went wrong');
     }
+});
 
-
+alexaApp.playbackController('NextCommandIssued', (request, response) => {
+  const user_id = req.data.session.userId;
+  var stream = {
+    "url": MUSICS[user_id][INDEXES[user_id]+1].aacPath,
+    "token": MUSICS[user_id][INDEXES[user_id]+1].id,
+    "expectedPreviousToken": MUSICS[user_id][INDEXES[user_id]].id,
+    "offsetInMilliseconds": 0
+  };
+  response.audioPlayerPlayStream("REPLACE_ALL", stream);
 });
 
 alexaApp.audioPlayer("PlaybackFinished", function(request, response) {
