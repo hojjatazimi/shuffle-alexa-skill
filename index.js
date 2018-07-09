@@ -49,8 +49,26 @@ alexaApp.launch(async function(req, response) {
         "token": music.id,
         "offsetInMilliseconds": 0
       };
+const      metadata = {
+        "title": "My opinion: how could you diss-a-brie?",
+        "subtitle": "Vince Fontana",
+        "art": {
+          "sources": [
+            {
+              "url": "https://url-of-the-skill-image.com/brie-album-art.png"
+            }
+          ]
+        },
+        "backgroundImage": {
+          "sources": [
+            {
+              "url": "https://url-of-the-skill-image.com/brie-background.png"
+            }
+          ]
+        }
+      }
       console.log('Playing_from_launch', stream);
-      response.audioPlayerPlayStream("REPLACE_ALL", stream);
+      response.audioPlayerPlayStream("REPLACE_ALL", stream, metadata);
     }catch(e){
       console.error(e);
       response.say('Something went wrong');
