@@ -209,7 +209,7 @@ alexaApp.intent('AMAZON.RepeatIntent', function(req, response){
     'expectedPreviousToken': MUSICS[user_id][INDEXES[user_id]].id,
     "offsetInMilliseconds": SECONDS[user_id]
   };
-  response.say('Song will be repeated.');
+  // response.say('Song will be repeated.');
   response.audioPlayerPlayStream("REPLACE_ALL", stream);
 })
 
