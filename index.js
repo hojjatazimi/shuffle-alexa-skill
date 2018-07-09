@@ -119,9 +119,9 @@ alexaApp.audioPlayer("PlaybackNearlyFinished", function(request, response) {
 });
 
 alexaApp.audioPlayer("PreviousCommandIssued", function(request, response) {
+  console.log('preving');
   const user_id = request.data.context.System.user.userId;
   if (INDEXES[user_id] > 0){
-    console.log('playing new');
     
     const old = INDEXES[user_id];
     INDEXES[user_id] --;
