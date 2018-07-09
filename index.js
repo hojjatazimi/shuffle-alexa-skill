@@ -28,7 +28,7 @@ alexaApp.express({
   // development, but not recommended for production. disabled by default
   debug: true
 });
-
+console.log('alexa', alexaApp);
 // now POST calls to /test in express will be handled by the app.request() function
 
 // from here on you can setup any other express routes or middlewares as normal
@@ -117,7 +117,7 @@ alexaApp.audioPlayer("PlaybackStarted", function(request, response) {
   // response.audioPlayerPlayStream("ENQUEUE", stream);
 });
 
-alexa.intent('System.ExceptionEncountered', function(req, res){
+alexa.on('System.ExceptionEncountered', function(req, res){
 console.log('err', req.err);
 })
 
