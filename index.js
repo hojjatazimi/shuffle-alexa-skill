@@ -43,9 +43,9 @@ alexaApp.launch(function(request, response) {
 
 alexaApp.intent('playChannel', function(req, res){
   const stream ={
-    "url": "https://box.backtory.com/beeptunes/980/03151/738/AAC_HE/1_4ud6UHEQtS.m4a",
+    "url": "http://sv.blogmusic.ir/myahang/Shahram-Shokoohi-Akharin-Negah-128.mp3",
   };
-  res.audioPlayerPlayStream("ENQUEUE", stream);
+  res.audioPlayerPlayStream("REPLACE_ALL", stream);
 })
 
 
