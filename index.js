@@ -66,6 +66,20 @@ alexaApp.playbackController('NextCommandIssued', (req, response) => {
   };
   response.audioPlayerPlayStream("REPLACE_ALL", stream);
 });
+alexaApp.playbackController('PreviousCommandIssued', (req, response) => {
+  const user_id = req.data.context.System.user.userId;
+  if (INDEXES[user_id] > 0){
+    INDEXES[user_id]++;
+    var stream = {
+      "url": MUSICS[user_id][INDEXES[user_id]].aacPath,
+      "token": MUSICS[user_id][INDEXES[user_id]].id,
+      "offsetInMilliseconds": 0
+    };
+    response.audioPlayerPlayStream("REPLACE_ALL", stream);
+  }else{
+    response.say('No song Available!');
+  }
+});
 alexaApp.playbackController('PauseCommandIssued', (req, response)=>{
   const user_id = req.userId;
   SECONDS[user_id] = req.context.AudioPlayer.offsetInMilliseconds;
@@ -118,31 +132,7 @@ alexaApp.audioPlayer("PlaybackNearlyFinished", function(request, response) {
 
 });
 
-alexaApp.audioPlayer("PreviousCommandIssued", function(request, response) {
-  console.log('preving');
-  const user_id = request.data.context.System.user.userId;
-  if (INDEXES[user_id] > 0){
-    
-    const old = INDEXES[user_id];
-    INDEXES[user_id] --;
-    console.log('index changed from '+String(old), String(INDEXES[user_id]));
-    
-    
-    const music = MUSICS[user_id][INDEXES[user_id]];
-    var stream = {
-      "url": music.aacPath,
-      "token": music.id,
-      // 'expectedPreviousToken':MUSICS[user_id][old].id,
-      "offsetInMilliseconds": 0
-    };
-    console.log('finished, playing new', stream);
-    response.audioPlayerPlayStream("REPLACE_ALL", stream);
-  }else{
-    response.say('No Song Available!');
-  }
 
-
-});
 
 alexaApp.on('System.ExceptionEncountered', function(req, res){
   console.log('err', req.data.request.error);
