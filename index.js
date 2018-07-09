@@ -11,8 +11,11 @@ var INDEXES = [];
 const methods = require('./methods')
 
 
-
-
+meh = async ()=> {
+  const shit = await methods.getMusics();
+  console.log(shit);
+}
+meh();
 // ALWAYS setup the alexa app and attach it to express before anything else.
 var alexaApp = new alexa.app("shuffle");
 
@@ -51,7 +54,7 @@ alexaApp.launch(async function(req, response) {
       response.audioPlayerPlayStream("REPLACE_ALL", stream);
     }catch(e){
       console.error(e);
-      response.say('Somwthing went wrong');
+      response.say('Something went wrong');
     }
 
 
