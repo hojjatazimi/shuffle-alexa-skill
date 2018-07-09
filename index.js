@@ -40,27 +40,22 @@ app.set("view engine", "ejs");
 
 alexaApp.launch(async function(req, response) {
   
-    const stream  = {
-      'url':'https://box.backtory.com/beeptunes/999/04045/100/AAC_HE/1_0UQlcxOXhO.m4a',
-      'token': '12312322',
-      'offsetInMilliseconds': 0
+
+    const user_id = req.data.session.userId;
+    INDEXES[user_id] = 0;
+    try{
+      MUSICS[user_id]  =  await methods.getMusics();
+      const music = MUSICS[user_id][INDEXES[user_id]];
+      const stream ={
+        "url": music.aacPath,
+        "token": music.id,
+        "offsetInMilliseconds": 0
+      };
+      response.audioPlayerPlayStream("REPLACE_ALL", stream);
+    }catch(e){
+      console.error(e);
+      response.say('Something went wrong');
     }
-    response.audioPlayerPlayStream("REPLACE_ALL", stream);
-    // const user_id = req.data.session.userId;
-    // INDEXES[user_id] = 0;
-    // try{
-    //   MUSICS[user_id]  =  await methods.getMusics();
-    //   const music = MUSICS[user_id][INDEXES[user_id]];
-    //   const stream ={
-    //     "url": music.aacPath,
-    //     "token": music.id,
-    //     "offsetInMilliseconds": 0
-    //   };
-    //   response.audioPlayerPlayStream("REPLACE_ALL", stream);
-    // }catch(e){
-    //   console.error(e);
-    //   response.say('Something went wrong');
-    // }
 
 
 });
