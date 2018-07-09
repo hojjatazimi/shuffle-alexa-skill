@@ -141,7 +141,9 @@ alexaApp.intent('playChannel', async function(req, response){
   }
 })
 
-alexaApp.on('AMAZON.NextIntent', function(req, res){
+
+
+alexaApp.intent('playChannel',  function(req, response){
   const user_id = req.data.context.System.user.userId;
   INDEXES[user_id]++;
   var stream = {
