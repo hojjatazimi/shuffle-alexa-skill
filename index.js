@@ -83,6 +83,7 @@ alexaApp.audioPlayer("PlaybackFinished", function(request, response) {
 
 
 alexaApp.audioPlayer("PlaybackStarted", function(request, response) {
+  console.log('playing new');
   // response.say('Done');
   // immediate response
   // console.log('HOJJAT_PLAY_BACK');
