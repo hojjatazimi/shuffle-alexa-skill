@@ -117,6 +117,10 @@ alexaApp.audioPlayer("PlaybackStarted", function(request, response) {
   // response.audioPlayerPlayStream("ENQUEUE", stream);
 });
 
+alexa.intent('System.ExceptionEncountered', function(req, res){
+console.log('err', req.err);
+})
+
 alexaApp.intent('playChannel', async function(req, response){
   const user_id = req.data.session.userId;
   INDEXES[user_id] = 0;
