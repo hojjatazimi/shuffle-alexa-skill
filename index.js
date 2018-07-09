@@ -45,6 +45,7 @@ alexaApp.launch(function(request, response) {
       "offsetInMilliseconds": 0
     };
     console.log('ahhh', stream);
+    response.say('Hi');
     response.audioPlayerPlayStream("REPLACE_ALL", stream);
   });
 });
