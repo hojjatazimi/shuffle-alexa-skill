@@ -81,6 +81,15 @@ alexaApp.audioPlayer("PlaybackFinished", function(request, response) {
   response.say('finished');
 });
 
+alexaApp.pre = function(request, response, type) {
+  console.log('req', request);
+  console.log('type', type);
+  // if (request.applicationId != "amzn1.echo-sdk-ams.app.000000-d0ed-0000-ad00-000000d00ebe") {
+  //   // fail ungracefully
+  //   throw "Invalid applicationId";
+  //   // `return response.fail("Invalid applicationId")` will also work
+  // }
+};
 
 alexaApp.audioPlayer("PlaybackStarted", function(request, response) {
   console.log('playing new');
