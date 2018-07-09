@@ -46,8 +46,8 @@ alexaApp.launch(async function(req, response) {
        { 'Postman-Token': 'e7d28854-b797-46fd-8a34-3485aacf028c',
          'Cache-Control': 'no-cache' } };
     MUSICS[user_id] = await request(options);
+    MUSICS[user_id] = JSON.parse(MUSICS[user_id]);
     const music = MUSICS[user_id][INDEXES[user_id]];
-    console.log(music)
     const stream ={
       "url": music.aacPath,
       "token": music.id,
