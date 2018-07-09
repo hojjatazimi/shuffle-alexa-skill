@@ -7,7 +7,7 @@ var app = express();
 
 var MUSICS = [];
 var INDEXES = [];
-
+var SECONDS = [];
 const methods = require('./methods')
 
 
@@ -67,7 +67,8 @@ alexaApp.playbackController('NextCommandIssued', (req, response) => {
   response.audioPlayerPlayStream("REPLACE_ALL", stream);
 });
 alexaApp.playbackController('PauseCommandIssued', (req, response)=>{
-  console.log('ammatono', req);
+  const user_id = req.userId;
+  console.log('ammatono', req.userId);
 })
 alexaApp.playbackController('PlaybackStopped', (req, response)=>{
   console.log('ammatono', req);
