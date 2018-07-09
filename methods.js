@@ -13,6 +13,7 @@ exports.getMusics = (cb) =>{
         if (error) throw new Error(error);
         // console.log('response', response)
         // console.log(body);
-        return cb(body);
+        out = JSON.parse(body);
+        return cb(out);
       });
 }
