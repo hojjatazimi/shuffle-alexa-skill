@@ -17,7 +17,29 @@ exports.getMusics =  () =>{
             }
           });
     });
-
 }
 
-  
+exports.auidioDirective = function(behav, stream, metadata){
+const out = {
+    "version": "1.0",
+    "sessionAttributes": {},
+    "response": {
+      "outputSpeech": {},
+      "card": {},
+      "reprompt": {},
+      "shouldEndSession": true,
+      "directives": [
+        {
+          "type": "AudioPlayer.Play",
+          "playBehavior": behav,
+          "audioItem": {
+            "stream": stream,
+            "metadata": metadata
+          }
+        }
+      ]
+    }
+  }
+  return out;
+
+}

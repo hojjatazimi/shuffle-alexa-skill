@@ -68,7 +68,8 @@ const      metadata = {
         }
       }
       console.log('Playing_from_launch', stream);
-      response.audioPlayerPlayStream("REPLACE_ALL", stream, {metadata:metadata});
+      response.directive(methods.auidioDirective('REPLACE_ALL', stream, metadata));
+      // response.audioPlayerPlayStream("REPLACE_ALL", stream, {metadata:metadata});
     }catch(e){
       console.error(e);
       response.say('Something went wrong');
