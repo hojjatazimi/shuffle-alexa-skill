@@ -154,6 +154,17 @@ alexaApp.intent('AMAZON.NextIntent',  function(req, response){
   };
   response.audioPlayerPlayStream("REPLACE_ALL", stream);
 })
+alexaApp.intent('AMAZON.PauseIntent',  function(req, response){
+  console.log(req);
+  // const user_id = req.data.context.System.user.userId;
+  // INDEXES[user_id]++;
+  // var stream = {
+  //   "url": MUSICS[user_id][INDEXES[user_id]].aacPath,
+  //   "token": MUSICS[user_id][INDEXES[user_id]].id,
+  //   "offsetInMilliseconds": 0
+  // };
+  response.audioPlayerStop()
+})
 
 
 app.listen(PORT, () => console.log("Listening on port " + PORT + "."));
