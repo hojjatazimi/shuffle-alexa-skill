@@ -66,6 +66,9 @@ alexaApp.playbackController('NextCommandIssued', (req, response) => {
   };
   response.audioPlayerPlayStream("REPLACE_ALL", stream);
 });
+alexaApp.playbackController('PlaybackStopped', (req, response)=>{
+  console.log('ammatono', req);
+})
 
 // alexaApp.audioPlayer("PlaybackFinished", function(request, response) {
 //   // immediate response
