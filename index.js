@@ -68,7 +68,16 @@ alexaApp.playbackController('NextCommandIssued', (req, response) => {
 });
 alexaApp.playbackController('PauseCommandIssued', (req, response)=>{
   const user_id = req.userId;
-  console.log('ammatono', req);
+  SECONDS[user_id] = req.AudioPlayer.offsetInMilliseconds;
+})
+alexaApp.playbackController('PlayCommandIssued', (req, response)=>{
+  const user_id = req.userId;
+  var stream = {
+    "url": MUSICS[user_id][INDEXES[user_id]].aacPath,
+    "token": MUSICS[user_id][INDEXES[user_id]].id,
+    "offsetInMilliseconds": SECONDS[user_id]
+  };
+  response.audioPlayerPlayStream("REPLACE_ALL", stream);
 })
 alexaApp.playbackController('PlaybackStopped', (req, response)=>{
   console.log('ammatono', req);
