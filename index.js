@@ -62,15 +62,16 @@ alexaApp.launch(async function(req, response) {
 
 alexaApp.audioPlayer("PlaybackFinished", function(request, response) {
   // immediate response
-  const user_id = request.data.context.System.user.userId;
-  const music = MUSICS[user_id][INDEXES[user_id]];
-  var stream = {
-    "url": music.aacPath,
-    "token": music.id,
-    "offsetInMilliseconds": 0
-  };
-  console.log(stream);
-  response.audioPlayerPlayStream("REPLACE_ALL", stream);
+  // const user_id = request.data.context.System.user.userId;
+  // const music = MUSICS[user_id][INDEXES[user_id]];
+  // var stream = {
+  //   "url": music.aacPath,
+  //   "token": music.id,
+  //   "offsetInMilliseconds": 0
+  // };
+  // console.log(stream);
+  // response.audioPlayerPlayStream("REPLACE_ALL", stream);
+  response.say('finished');
 });
 
 
