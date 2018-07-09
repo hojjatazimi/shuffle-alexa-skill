@@ -155,16 +155,18 @@ alexaApp.intent('AMAZON.NextIntent',  function(req, response){
   response.audioPlayerPlayStream("REPLACE_ALL", stream);
 })
 alexaApp.intent('AMAZON.PauseIntent',  function(req, response){
-  console.log(req);
-  // const user_id = req.data.context.System.user.userId;
-  // INDEXES[user_id]++;
-  // var stream = {
-  //   "url": MUSICS[user_id][INDEXES[user_id]].aacPath,
-  //   "token": MUSICS[user_id][INDEXES[user_id]].id,
-  //   "offsetInMilliseconds": 0
-  // };
+  const user_id = req.data.context.System.user.userId;
+  SECONDS[user_id] = req.context.AudioPlayer.offsetInMilliseconds;
   response.audioPlayerStop()
 })
-
+alexaApp.intent('Amazon.ResumeIntent', function(req, response){
+  const user_id = req.data.context.System.user.userId;
+  var stream = {
+    "url": MUSICS[user_id][INDEXES[user_id]].aacPath,
+    "token": MUSICS[user_id][INDEXES[user_id]].id,
+    "offsetInMilliseconds": SECONDS[user_id]
+  };
+  response.audioPlayerPlayStream("REPLACE_ALL", stream);
+})
 
 app.listen(PORT, () => console.log("Listening on port " + PORT + "."));
