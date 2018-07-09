@@ -33,29 +33,27 @@ alexaApp.express({
 // from here on you can setup any other express routes or middlewares as normal
 app.set("view engine", "ejs");
 
-alexaApp.launch(function(request, response) {
-  response.say('Hi');
-  // async function handler (){
-  //   const user_id = request.data.session.userId;
-  //   INDEXES[user_id] = 0;
-  //   const options = { method: 'GET',
-  //     url: 'https://streaming.shuffle.one/public/channel/promoted',
-  //     qs: { channelId: '889', page: '1', count: '200' },
-  //     headers: 
-  //      { 'Postman-Token': 'e7d28854-b797-46fd-8a34-3485aacf028c',
-  //        'Cache-Control': 'no-cache' } };
-  //   MUSICS[user_id] = request(options);
-  //   const music = MUSICS[user_id][INDEXES[user_id]];
-  //   const stream ={
-  //     "url": music.aacPath,
-  //     "token": music.id,
-  //     "offsetInMilliseconds": 0
-  //   };
-    
-    // response.audioPlayerPlayStream("REPLACE_ALL", stream);
-  // }
+alexaApp.launch(async function(request, response) {
   
-  // handler();
+
+    const user_id = request.data.session.userId;
+    INDEXES[user_id] = 0;
+    const options = { method: 'GET',
+      url: 'https://streaming.shuffle.one/public/channel/promoted',
+      qs: { channelId: '889', page: '1', count: '200' },
+      headers: 
+       { 'Postman-Token': 'e7d28854-b797-46fd-8a34-3485aacf028c',
+         'Cache-Control': 'no-cache' } };
+    MUSICS[user_id] = await request(options);
+    const music = MUSICS[user_id][INDEXES[user_id]];
+    const stream ={
+      "url": music.aacPath,
+      "token": music.id,
+      "offsetInMilliseconds": 0
+    };
+    // response.say('Hi');
+    response.audioPlayerPlayStream("REPLACE_ALL", stream);
+
 });
 
 
