@@ -28,7 +28,7 @@ alexaApp.express({
   // development, but not recommended for production. disabled by default
   debug: true
 });
-console.log('alexa', alexaApp);
+
 // now POST calls to /test in express will be handled by the app.request() function
 
 // from here on you can setup any other express routes or middlewares as normal
@@ -66,19 +66,18 @@ alexaApp.playbackController('NextCommandIssued', (req, response) => {
   response.audioPlayerPlayStream("REPLACE_ALL", stream);
 });
 
-alexaApp.audioPlayer("PlaybackFinished", function(request, response) {
-  // immediate response
-  // const user_id = request.data.context.System.user.userId;
-  // const music = MUSICS[user_id][INDEXES[user_id]];
-  // var stream = {
-  //   "url": music.aacPath,
-  //   "token": music.id,
-  //   "offsetInMilliseconds": 0
-  // };
-  // console.log(stream);
-  // response.audioPlayerPlayStream("REPLACE_ALL", stream);
-  response.say('finished');
-});
+// alexaApp.audioPlayer("PlaybackFinished", function(request, response) {
+//   // immediate response
+//   const user_id = request.data.context.System.user.userId;
+//   const music = MUSICS[user_id][INDEXES[user_id]];
+//   var stream = {
+//     "url": music.aacPath,
+//     "token": music.id,
+//     "offsetInMilliseconds": 0
+//   };
+//   console.log('finished, playing new', stream);
+//   response.audioPlayerPlayStream("REPLACE_ALL", stream);
+// });
 
 alexaApp.pre = function(request, response, type) {
   // console.log('req', request);
@@ -89,36 +88,32 @@ alexaApp.pre = function(request, response, type) {
   console.log('*')
   console.log('*')
   console.log('*')
-  // if (request.applicationId != "amzn1.echo-sdk-ams.app.000000-d0ed-0000-ad00-000000d00ebe") {
-  //   // fail ungracefully
-  //   throw "Invalid applicationId";
-  //   // `return response.fail("Invalid applicationId")` will also work
-  // }
 };
 
 alexaApp.audioPlayer("PlaybackStarted", function(request, response) {
   console.log('playing new');
-  // response.say('Done');
-  // immediate response
-  // console.log('HOJJAT_PLAY_BACK');
-  // console.log(request.data.context.System.user);
   const user_id = request.data.context.System.user.userId;
-  // const prevMusic = MUSICS[user_id][INDEXES[user_id]];
+  const old = INDEXES[user_id];
   INDEXES[user_id] ++;
-  // const music = MUSICS[user_id][INDEXES[user_id]];
-  // var stream = {
-  //   "url": music.aacPath,
-  //   "token": music.id,
-  //   "expectedPreviousToken": prevMusic.id,
-  //   "offsetInMilliseconds": 0
-  // };
-  // console.log(stream);
-  // response.audioPlayerPlayStream("ENQUEUE", stream);
+  console.log('index changed from '+String(old), String(INDEXES[user_id]));
+  
+  
+  const music = MUSICS[user_id][INDEXES[user_id]];
+  var stream = {
+    "url": music.aacPath,
+    "token": music.id,
+    'expectedPreviousToken':MUSICS[user_id][old].id,
+    "offsetInMilliseconds": 0
+  };
+  console.log('finished, playing new', stream);
+  response.audioPlayerPlayStream("ENQUEUE", stream);
+
+
 });
 
 alexaApp.on('System.ExceptionEncountered', function(req, res){
-console.log('err', req.data.request.error);
-console.log('cause', req.data.request.cause);
+  console.log('err', req.data.request.error);
+  console.log('cause', req.data.request.cause);
 })
 
 alexaApp.intent('playChannel', async function(req, response){
@@ -138,22 +133,5 @@ alexaApp.intent('playChannel', async function(req, response){
     response.say('Something went wrong');
   }
 })
-
-
-alexaApp.intent("nameIntent", {
-    "slots": { "NAME": "LITERAL" },
-    "utterances": [
-      "my {name is|name's} {names|NAME}", "set my name to {names|NAME}"
-    ]
-  },
-  function(request, response) {
-    console.log('hojjat_shuffle');
-    console.log(JSON.stringify(request));
-    response.say("Success!");
-  }
-);
-
-
-
 
 app.listen(PORT, () => console.log("Listening on port " + PORT + "."));
