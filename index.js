@@ -143,7 +143,27 @@ alexaApp.intent('playChannel', async function(req, response){
 
 
 
-alexaApp.intent('playChannel',  function(req, response){
+alexaApp.intent('next',  function(req, response){
+  const user_id = req.data.context.System.user.userId;
+  INDEXES[user_id]++;
+  var stream = {
+    "url": MUSICS[user_id][INDEXES[user_id]].aacPath,
+    "token": MUSICS[user_id][INDEXES[user_id]].id,
+    "offsetInMilliseconds": 0
+  };
+  response.audioPlayerPlayStream("REPLACE_ALL", stream);
+})
+alexaApp.intent('AMAZON.NextIntent',  function(req, response){
+  const user_id = req.data.context.System.user.userId;
+  INDEXES[user_id]++;
+  var stream = {
+    "url": MUSICS[user_id][INDEXES[user_id]].aacPath,
+    "token": MUSICS[user_id][INDEXES[user_id]].id,
+    "offsetInMilliseconds": 0
+  };
+  response.audioPlayerPlayStream("REPLACE_ALL", stream);
+})
+alexaApp.intent('AMAZON.Next',  function(req, response){
   const user_id = req.data.context.System.user.userId;
   INDEXES[user_id]++;
   var stream = {
