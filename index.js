@@ -151,7 +151,7 @@ alexaApp.pre = function(request, response, type) {
 alexaApp.audioPlayer("PlaybackNearlyFinished", function(request, response) {
   console.log('playing new');
   const user_id = request.data.context.System.user.userId;
-  if (REPEATS[user_id] == false || REPEATS[user_id] == null){
+  if (REPEATS[user_id] != true ){
     const old = INDEXES[user_id];
     INDEXES[user_id] ++;
     console.log('index changed from '+String(old), String(INDEXES[user_id]));
