@@ -69,6 +69,9 @@ const      metadata = {
       }
       console.log('Playing_from_launch', stream);
       // response.directive(methods.auidioDirective('REPLACE_ALL', stream, metadata));
+      let name = String(music.englishName);
+      name = name.substring(0, name.length-5);
+      name = name.replace(/_/g, "D");
       response.say('now playing' + music.englishName)
       response.audioPlayerPlayStream("REPLACE_ALL", stream, metadata);
     }catch(e){
