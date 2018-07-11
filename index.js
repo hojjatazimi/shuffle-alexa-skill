@@ -161,11 +161,11 @@ alexaApp.audioPlayer("PlaybackNearlyFinished", function(request, response) {
     var stream = {
       "url": music.aacPath,
       "token": music.id,
-      // 'expectedPreviousToken':MUSICS[user_id][old].id,
+      'expectedPreviousToken':MUSICS[user_id][old].id,
       "offsetInMilliseconds": 0
     };
     console.log('finished, playing new', stream);
-    response.audioPlayerPlayStream("REPLACE_ALL", stream);
+    response.audioPlayerPlayStream("ENQUEUE", stream);
   }
 
 
