@@ -69,6 +69,6 @@ exports.auidioDirective = function(behav, stream, metadata){
 //       ]
 //     }
 //   }
-  console.log(JSON.stringify(out));
+  console.log('out',JSON.stringify(out));
   return out;
 }
