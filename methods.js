@@ -20,27 +20,55 @@ exports.getMusics =  () =>{
 }
 
 exports.auidioDirective = function(behav, stream, metadata){
-const out = {
-    "version": "1.0",
-    "sessionAttributes": {},
-    "response": {
-      "outputSpeech": {},
-      "card": {},
-      "reprompt": {},
-      "shouldEndSession": true,
-      "directives": [
-        {
-          "type": "AudioPlayer.Play",
-          "playBehavior": behav,
-          "audioItem": {
-            "stream": stream,
-            "metadata": metadata
-          }
-        }
-      ]
+
+
+  const out = {
+    "body": {
+        "version": "1.0",
+        "response": {
+            "outputSpeech": {
+				"type": "SSML",
+				"ssml": "<speak>now playing</speak>"
+			},
+            "directives": [
+                {
+                "type": "AudioPlayer.Play",
+                "playBehavior": behav,
+                "audioItem": {
+                    "stream": stream,
+                    "metadata": metadata
+                }
+                }
+            ],
+            "shouldEndSession": true,
+        },
+        "sessionAttributes": {},
     }
   }
+
+
+
+
+// const out = {
+//     "version": "1.0",
+//     "sessionAttributes": {},
+//     "response": {
+//       "outputSpeech": {},
+//       "card": {},
+//       "reprompt": {},
+//       "shouldEndSession": true,
+//       "directives": [
+//         {
+//           "type": "AudioPlayer.Play",
+//           "playBehavior": behav,
+//           "audioItem": {
+//             "stream": stream,
+//             "metadata": metadata
+//           }
+//         }
+//       ]
+//     }
+//   }
   console.log(JSON.stringify(out));
   return out;
-
 }

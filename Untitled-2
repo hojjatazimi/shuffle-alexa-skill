@@ -1,0 +1,23 @@
+{
+    "body": {
+        "version": "1.0",
+        "response": {
+            "outputSpeech": {
+				"type": "SSML",
+				"ssml": "<speak>now playing01-Kaveh Afagh Shaa</speak>"
+			},
+            "directives": [
+                {
+                "type": "AudioPlayer.Play",
+                "playBehavior": behav,
+                "audioItem": {
+                    "stream": stream,
+                    "metadata": metadata
+                }
+                }
+            ],
+            "shouldEndSession": true,
+        },
+        "sessionAttributes": {},
+    }
+  }
