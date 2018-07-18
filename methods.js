@@ -21,6 +21,7 @@ exports.getMusics =  () =>{
 
 exports.auidioDirective = function(behav, stream, metadata){
 
+  console.log('directiving');
 
   const out = {
     "body": {
