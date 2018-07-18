@@ -49,7 +49,7 @@ alexaApp.launch(async function(req, response) {
         "token": music.id,
         "offsetInMilliseconds": 0
       };
-const      metadata = {
+      const      metadata = {
         "title": "My opinion: how could you diss-a-brie?",
         "subtitle": "Vince Fontana",
         "art": {
@@ -67,10 +67,10 @@ const      metadata = {
           ]
         }
       }
-      console.log('Playing_from_launch', stream);
+      // console.log('Playing_from_launch', stream);
       const tmp = methods.auidioDirective('REPLACE_ALL', stream, metadata);
       console.log('directive', tmp);
-      response.directive(tmp);
+      // response.directive(tmp);
       // let name = String(music.englishName);
       // name = name.substring(0, name.length-5);
       // name = name.replace(/_/g, " ");  
