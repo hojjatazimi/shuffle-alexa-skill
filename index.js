@@ -76,7 +76,6 @@ alexaApp.launch(async function(req, response) {
       // name = name.replace(/_/g, " ");  
       // response.say('now playing ' + name)
       // response.audioPlayerPlayStream("REPLACE_ALL", stream, metadata);
-      response.say('OK');
     }catch(e){
       console.error(e);
       response.say('Something went wrong');
