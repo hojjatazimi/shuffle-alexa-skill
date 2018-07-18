@@ -39,7 +39,6 @@ app.set("view engine", "ejs");
 
 
 alexaApp.launch(async function(req, response) {
-  console.log('start');
   const user_id = req.data.session.userId;
     INDEXES[user_id] = 0;
     try{
@@ -68,15 +67,15 @@ alexaApp.launch(async function(req, response) {
           ]
         }
       }
-      // console.log('Playing_from_launch', stream);
-      const tmp = methods.auidioDirective('REPLACE_ALL', stream, metadata);
-      console.log('directive', tmp);
+      console.log('Playing_from_launch', stream);
+      // const tmp = methods.auidioDirective('REPLACE_ALL', stream, metadata);
+      // console.log('directive', tmp);
       // response.directive(tmp);
       // let name = String(music.englishName);
       // name = name.substring(0, name.length-5);
       // name = name.replace(/_/g, " ");  
-      // response.say('now playing' + name)
-      // response.audioPlayerPlayStream("REPLACE_ALL", stream, metadata);
+      response.say('now playing ' + name)
+      response.audioPlayerPlayStream("REPLACE_ALL", stream, metadata);
     }catch(e){
       console.error(e);
       response.say('Something went wrong');
