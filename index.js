@@ -39,6 +39,7 @@ app.set("view engine", "ejs");
 
 
 alexaApp.launch(async function(req, response) {
+  console.log('start');
   const user_id = req.data.session.userId;
     INDEXES[user_id] = 0;
     try{
