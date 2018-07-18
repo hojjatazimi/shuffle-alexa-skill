@@ -70,7 +70,7 @@ const      metadata = {
       console.log('Playing_from_launch', stream);
       const tmp = methods.auidioDirective('REPLACE_ALL', stream, metadata);
       console.log('directive', tmp);
-      response.directive(tmp);
+      // response.directive(tmp);
       // let name = String(music.englishName);
       // name = name.substring(0, name.length-5);
       // name = name.replace(/_/g, " ");  
