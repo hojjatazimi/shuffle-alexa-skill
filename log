@@ -1,0 +1,2 @@
+rm 5df99d8709917deef3a8e9ee289b39c9e3bb701d.intermediate cfe9ef27c70fffab315008d7d28330cf5dcf0ab0.intermediate
+if [ ! -r node -o ! -L node ]; then ln -fs out/Release/node node; fi

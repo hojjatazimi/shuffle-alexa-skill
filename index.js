@@ -3,6 +3,7 @@ var alexa = require("alexa-app");
 var request = require("request");
 
 var PORT = process.env.PORT || 8080;
+var PORTs = process.env.PORT || 8443;
 var app = express();
 
 var MUSICS = [];
@@ -11,6 +12,17 @@ var SECONDS = [];
 var REPEATS = [];
 const methods = require('./methods')
 
+
+
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+var privateKey  = fs.readFileSync('../ssl/server.key', 'utf8');
+var certificate = fs.readFileSync('../ssl/server.crt', 'utf8');
+
+var credentials = {key: privateKey, cert: certificate};
+// var express = require('express');
+// var app = express();
 
 
 // ALWAYS setup the alexa app and attach it to express before anything else.
@@ -39,6 +51,7 @@ app.set("view engine", "ejs");
 
 
 alexaApp.launch(async function(req, response) {
+  response.say('Hi');
   const user_id = req.data.session.userId;
     INDEXES[user_id] = 0;
     try{
@@ -262,4 +275,10 @@ alexaApp.intent('AMAZON.PreviousIntent', function(req, response){
   }
 })
 
-app.listen(PORT, () => console.log("Listening on port " + PORT + "."));
+// app.listen(PORT, () => console.log("Listening on port " + PORT + "."));
+
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+
+httpServer.listen(PORT);
+httpsServer.listen(PORTs);
